@@ -1,0 +1,9 @@
+# Helm
+charts/
+*.tgz
+
+# Секреты — никогда не коммитить
+secrets/*.env
+secrets/*.json
+secrets/*.yaml
+!secrets/create-secrets.sh

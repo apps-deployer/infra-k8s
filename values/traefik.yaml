@@ -1,0 +1,35 @@
+deployment:
+  replicas: 1
+
+service:
+  spec:
+    loadBalancerIP: "93.77.186.20"
+
+ports:
+  web:
+    port: 8000
+    exposedPort: 80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  websecure:
+    port: 8443
+    exposedPort: 443
+
+persistence:
+  enabled: true
+  size: 128Mi
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "anidach@yandex.ru"
+      storage: /data/acme.json
+      tlsChallenge: {}
+
+ingressRoute:
+  dashboard:
+    enabled: false
