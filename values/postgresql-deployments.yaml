@@ -1,0 +1,20 @@
+auth:
+  username: deployments-service
+  existingSecret: postgres-deployments-passwords
+  secretKeys:
+    adminPasswordKey: admin-password
+    userPasswordKey: password
+
+primary:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: yc-network-hdd
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 500m

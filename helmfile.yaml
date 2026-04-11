@@ -8,11 +8,11 @@ helmDefaults:
   wait: true
   timeout: 600
   atomic: true
+  createNamespace: true
 
 releases:
   - name: traefik
     namespace: traefik
-    createNamespace: true
     chart: traefik/traefik
     version: "39.0.7"
     values:
@@ -20,11 +20,10 @@ releases:
 
   - name: postgres-projects
     namespace: apps-deployer
-    createNamespace: true
     chart: bitnami/postgresql
     version: "18.5.16"
     values:
-      - values/postgresql.yaml
+      - values/postgresql-projects.yaml
     set:
       - name: auth.database
         value: projects_db
@@ -34,7 +33,7 @@ releases:
     chart: bitnami/postgresql
     version: "18.5.16"
     values:
-      - values/postgresql.yaml
+      - values/postgresql-deployments.yaml
     set:
       - name: auth.database
         value: deployments_db
@@ -44,12 +43,12 @@ releases:
     chart: bitnami/postgresql
     version: "18.5.16"
     values:
-      - values/postgresql.yaml
+      - values/postgresql-auth.yaml
     set:
       - name: auth.database
         value: auth_db
 
-  - name: redis
+  - name: celery-broker
     namespace: apps-deployer
     chart: bitnami/redis
     version: "25.3.10"

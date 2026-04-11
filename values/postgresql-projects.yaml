@@ -1,8 +1,8 @@
 auth:
-  username: appuser
-  existingSecret: postgres-passwords  # секрет создаётся скриптом secrets/create-secrets.sh
+  username: projects-service
+  existingSecret: postgres-projects-passwords
   secretKeys:
-    adminPasswordKey: postgres-password
+    adminPasswordKey: admin-password
     userPasswordKey: password
 
 primary:

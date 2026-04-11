@@ -1,5 +1,7 @@
 auth:
-  enabled: false
+  enabled: true
+  existingSecret: redis-password
+  existingSecretPasswordKey: password
 
 master:
   persistence:
@@ -16,4 +18,4 @@ resources:
     cpu: 200m
 
 replica:
-  replicaCount: 0  # только master, без реплик — достаточно для MVP
+  replicaCount: 0
