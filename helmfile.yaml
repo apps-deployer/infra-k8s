@@ -17,6 +17,9 @@ releases:
     version: "39.0.7"
     values:
       - values/traefik.yaml
+      - service:
+          spec:
+            loadBalancerIP: {{ requiredEnv "INGRESS_IP" }}
 
   - name: postgres-projects
     namespace: apps-deployer

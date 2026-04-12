@@ -2,8 +2,7 @@ deployment:
   replicas: 1
 
 service:
-  spec:
-    loadBalancerIP: {{ requiredEnv "INGRESS_IP" | quote }}
+  spec: {}
 
 ports:
   web:
