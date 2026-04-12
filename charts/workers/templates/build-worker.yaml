@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-worker
+  namespace: {{ .Values.namespace }}
+---
+# Kaniko needs to create and manage Job pods for builds
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: build-worker
+  namespace: {{ .Values.namespace }}
+rules:
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "create", "delete", "watch"]
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: build-worker
+  namespace: {{ .Values.namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: build-worker
+subjects:
+  - kind: ServiceAccount
+    name: build-worker
+    namespace: {{ .Values.namespace }}
+---
+# Registry credentials for Kaniko Jobs
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-credentials
+  namespace: {{ .Values.namespace }}
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: {{ .Values.registryDockerConfig | b64enc }}

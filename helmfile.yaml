@@ -17,13 +17,13 @@ releases:
     version: "39.0.7"
     values:
       - values/traefik.yaml.gotmpl
-      
+
   - name: postgres-projects
     namespace: apps-deployer
     chart: bitnami/postgresql
     version: "18.5.16"
     values:
-      - values/postgresql-projects.yaml
+      - values/postgresql-projects.yaml.gotmpl
     set:
       - name: auth.database
         value: projects_db
@@ -33,7 +33,7 @@ releases:
     chart: bitnami/postgresql
     version: "18.5.16"
     values:
-      - values/postgresql-deployments.yaml
+      - values/postgresql-deployments.yaml.gotmpl
     set:
       - name: auth.database
         value: deployments_db
@@ -43,7 +43,7 @@ releases:
     chart: bitnami/postgresql
     version: "18.5.16"
     values:
-      - values/postgresql-auth.yaml
+      - values/postgresql-auth.yaml.gotmpl
     set:
       - name: auth.database
         value: auth_db
@@ -53,4 +53,10 @@ releases:
     chart: bitnami/redis
     version: "25.3.10"
     values:
-      - values/redis.yaml
+      - values/redis.yaml.gotmpl
+
+  - name: workers
+    namespace: apps-deployer
+    chart: ./charts/workers
+    values:
+      - values/workers.yaml.gotmpl
