@@ -33,4 +33,6 @@ jobs:
         uses: helmfile/helmfile-action@v2
 
       - name: Helmfile apply
+        env:
+          INGRESS_IP: ${{ vars.INGRESS_IP }}
         run: helmfile apply
