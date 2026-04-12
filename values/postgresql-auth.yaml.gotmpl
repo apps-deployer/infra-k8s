@@ -1,9 +1,7 @@
 auth:
   username: auth-service
-  existingSecret: postgres-auth-passwords
-  secretKeys:
-    adminPasswordKey: admin-password
-    userPasswordKey: password
+  password: {{ requiredEnv "PG_AUTH_PASSWORD" | quote }}
+  postgresPassword: {{ requiredEnv "PG_AUTH_ADMIN_PASSWORD" | quote }}
 
 primary:
   persistence:

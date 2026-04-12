@@ -1,7 +1,6 @@
 auth:
   enabled: true
-  existingSecret: redis-password
-  existingSecretPasswordKey: password
+  password: {{ requiredEnv "REDIS_PASSWORD" | quote }}
 
 master:
   persistence:
