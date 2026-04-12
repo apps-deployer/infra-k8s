@@ -16,7 +16,11 @@ releases:
     chart: traefik/traefik
     version: "39.0.7"
     values:
+<<<<<<< Updated upstream
       - values/traefik.yaml
+=======
+      - values/traefik.yaml.gotmpl
+>>>>>>> Stashed changes
 
   - name: postgres-projects
     namespace: apps-deployer

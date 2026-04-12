@@ -3,7 +3,7 @@ deployment:
 
 service:
   spec:
-    loadBalancerIP: {{ requiredEnv "INGRESS_IP" | quote }}
+    loadBalancerIP: {{ requiredEnv "INGRESS_IP" }}
 
 ports:
   web:
