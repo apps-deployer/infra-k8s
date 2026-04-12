@@ -16,11 +16,8 @@ releases:
     chart: traefik/traefik
     version: "39.0.7"
     values:
-      - values/traefik.yaml
-      - service:
-          spec:
-            loadBalancerIP: {{ requiredEnv "INGRESS_IP" }}
-
+      - values/traefik.yaml.gotmpl
+      
   - name: postgres-projects
     namespace: apps-deployer
     chart: bitnami/postgresql
