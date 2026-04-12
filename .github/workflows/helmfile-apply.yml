@@ -1,0 +1,36 @@
+name: Helmfile Apply
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  helmfile-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install yc CLI
+        run: |
+          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+          echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
+
+      - name: Configure yc and get kubeconfig
+        env:
+          YC_SA_KEY: ${{ secrets.YC_SA_KEY }}
+          YC_CLUSTER_ID: ${{ secrets.YC_CLUSTER_ID }}
+        run: |
+          echo "$YC_SA_KEY" > sa-key.json
+          yc config set service-account-key sa-key.json
+          yc managed-kubernetes cluster get-credentials \
+            --id "$YC_CLUSTER_ID" \
+            --external \
+            --force
+
+      - name: Install helmfile
+        uses: helmfile/helmfile-action@v2
+
+      - name: Helmfile apply
+        run: helmfile apply
