@@ -1,9 +1,7 @@
 auth:
-  username: projects-service
-  existingSecret: postgres-projects-passwords
-  secretKeys:
-    adminPasswordKey: admin-password
-    userPasswordKey: password
+  username: deployments-service
+  password: {{ requiredEnv "PG_DEPLOYMENTS_PASSWORD" | quote }}
+  postgresPassword: {{ requiredEnv "PG_DEPLOYMENTS_ADMIN_PASSWORD" | quote }}
 
 primary:
   persistence:

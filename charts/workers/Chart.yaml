@@ -1,0 +1,5 @@
+apiVersion: v2
+name: workers
+description: ServiceAccounts and RBAC for deployments-service workers (build, deploy)
+type: application
+version: 0.1.0

@@ -1,0 +1,6 @@
+namespace: apps-deployer
+
+# Credentials for Kaniko to push to YC Container Registry.
+# Taken from registry-pusher-sa static key (terraform output from infra/envs/dev/registry).
+# Set REGISTRY_PUSHER_KEY_ID and REGISTRY_PUSHER_SECRET in GitHub Actions secrets.
+registryDockerConfig: {{ (dict "auths" (dict "cr.yandex" (dict "auth" (printf "%s:%s" (requiredEnv "REGISTRY_PUSHER_KEY_ID") (requiredEnv "REGISTRY_PUSHER_SECRET") | b64enc)))) | toJson }}

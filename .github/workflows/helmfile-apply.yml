@@ -36,4 +36,13 @@ jobs:
       - name: Helmfile apply
         env:
           INGRESS_IP: ${{ vars.INGRESS_IP }}
+          REGISTRY_PUSHER_KEY_ID: ${{ secrets.REGISTRY_PUSHER_KEY_ID }}
+          REGISTRY_PUSHER_SECRET: ${{ secrets.REGISTRY_PUSHER_SECRET }}
+          PG_AUTH_PASSWORD: ${{ secrets.PG_AUTH_PASSWORD }}
+          PG_AUTH_ADMIN_PASSWORD: ${{ secrets.PG_AUTH_ADMIN_PASSWORD }}
+          PG_DEPLOYMENTS_PASSWORD: ${{ secrets.PG_DEPLOYMENTS_PASSWORD }}
+          PG_DEPLOYMENTS_ADMIN_PASSWORD: ${{ secrets.PG_DEPLOYMENTS_ADMIN_PASSWORD }}
+          PG_PROJECTS_PASSWORD: ${{ secrets.PG_PROJECTS_PASSWORD }}
+          PG_PROJECTS_ADMIN_PASSWORD: ${{ secrets.PG_PROJECTS_ADMIN_PASSWORD }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
         run: helmfile apply

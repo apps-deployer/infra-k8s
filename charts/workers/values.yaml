@@ -1,0 +1,6 @@
+namespace: apps-deployer
+
+# Base64-encoded dockerconfigjson for YC Container Registry
+# Format: {"auths":{"cr.yandex":{"auth":"<base64(key_id:secret_key)>"}}}
+# Set via --set or values file, never committed to git
+registryDockerConfig: ""
