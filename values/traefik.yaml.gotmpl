@@ -35,7 +35,8 @@ certificatesResolvers:
     acme:
       email: "anidach@yandex.ru"
       storage: /data/acme.json
-      tlsChallenge: {}
+      httpChallenge:
+        entryPoint: web
 
 ingressRoute:
   dashboard:
