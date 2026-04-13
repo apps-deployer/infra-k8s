@@ -40,4 +40,4 @@ metadata:
   namespace: {{ .Values.namespace }}
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: {{ .Values.registryDockerConfig | b64enc }}
+  .dockerconfigjson: {{ printf `{"auths":{"cr.yandex":{"auth":"%s"}}}` (printf "%s:%s" .Values.registryKeyId .Values.registrySecret | b64enc) | b64enc }}
