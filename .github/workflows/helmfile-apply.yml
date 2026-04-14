@@ -45,4 +45,7 @@ jobs:
           PG_PROJECTS_PASSWORD: ${{ secrets.PG_PROJECTS_PASSWORD }}
           PG_PROJECTS_ADMIN_PASSWORD: ${{ secrets.PG_PROJECTS_ADMIN_PASSWORD }}
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          DNS_SA_KEY: ${{ secrets.DNS_SA_KEY }}
+          ACME_EMAIL: ${{ vars.ACME_EMAIL }}
+          ACME_ZONE: ${{ vars.ACME_ZONE }}
         run: helmfile apply

@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: {{ .Values.email }}
+    privateKeySecretRef:
+      name: letsencrypt-account-key
+    solvers:
+      - dns01:
+          webhook:
+            groupName: {{ .Values.groupName }}
+            solverName: yandex-cloud-dns
+            config:
+              serviceAccountSecretRef:
+                name: cert-manager-webhook-yandex-sa
+                key: service-account.json
+              zones:
+                - {{ .Values.zone }}

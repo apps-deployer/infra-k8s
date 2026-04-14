@@ -1,0 +1,5 @@
+apiVersion: v2
+name: cluster-issuer
+description: Let's Encrypt ClusterIssuer via Yandex Cloud DNS webhook
+type: application
+version: 0.1.0
