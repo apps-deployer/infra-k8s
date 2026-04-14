@@ -1,0 +1,10 @@
+groupName: acme.apps-deployer.local
+
+certManager:
+  namespace: cert-manager
+  serviceAccountName: cert-manager
+
+serviceAccount:
+  create: true
+
+yandexCloudServiceAccountJSON: {{ requiredEnv "DNS_SA_KEY" | quote }}

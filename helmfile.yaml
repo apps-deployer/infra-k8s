@@ -3,6 +3,8 @@ repositories:
     url: https://traefik.github.io/charts
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
+  - name: jetstack
+    url: https://charts.jetstack.io
 
 helmDefaults:
   wait: true
@@ -60,3 +62,27 @@ releases:
     chart: ./charts/workers
     values:
       - values/workers.yaml.gotmpl
+
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: "v1.17.2"
+    set:
+      - name: crds.enabled
+        value: "true"
+
+  - name: cert-manager-webhook-yandex
+    namespace: cert-manager
+    chart: https://github.com/yandex-cloud/cert-manager-webhook-yandex/releases/download/v0.2.0/cert-manager-webhook-yandex-0.2.0.tgz
+    needs:
+      - cert-manager/cert-manager
+    values:
+      - values/cert-manager-webhook-yandex.yaml.gotmpl
+
+  - name: cluster-issuer
+    namespace: cert-manager
+    chart: ./charts/cluster-issuer
+    needs:
+      - cert-manager/cert-manager-webhook-yandex
+    values:
+      - values/cluster-issuer.yaml.gotmpl
