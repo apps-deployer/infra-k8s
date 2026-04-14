@@ -9,9 +9,7 @@ installClusterIssuer:
   enabled: true
 
 cert-manager:
-  enabled: true
-  installCRDs: true
-  serviceAccount:
-    create: true
-    name: cert-manager-with-yc-webhook
-    automountServiceAccountToken: true
+  enabled: false
+
+certManager:
+  serviceAccountName: cert-manager
