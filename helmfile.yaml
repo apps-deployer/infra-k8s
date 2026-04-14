@@ -76,5 +76,6 @@ releases:
     chart: ./charts/cert-manager-webhook-yandex
     needs:
       - cert-manager/cert-manager
+    disableValidation: true
     values:
       - values/cert-manager-webhook-yandex.yaml.gotmpl
