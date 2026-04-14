@@ -1,10 +1,17 @@
-groupName: acme.apps-deployer.local
+config:
+  folder_id: {{ requiredEnv "YC_FOLDER_ID" | quote }}
+  email: {{ requiredEnv "ACME_EMAIL" | quote }}
+  server: https://acme-v02.api.letsencrypt.org/directory
+  auth:
+    json: {{ requiredEnv "DNS_SA_KEY" | quote }}
 
-certManager:
-  namespace: cert-manager
-  serviceAccountName: cert-manager
+installClusterIssuer:
+  enabled: true
 
-serviceAccount:
-  create: true
-
-yandexCloudServiceAccountJSON: {{ requiredEnv "DNS_SA_KEY" | quote }}
+cert-manager:
+  enabled: true
+  installCRDs: true
+  serviceAccount:
+    create: true
+    name: cert-manager-with-yc-webhook
+    automountServiceAccountToken: true
