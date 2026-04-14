@@ -48,4 +48,4 @@ jobs:
           DNS_SA_KEY: ${{ secrets.DNS_SA_KEY }}
           YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
           ACME_EMAIL: ${{ vars.ACME_EMAIL }}
-        run: helmfile apply
+        run: helmfile apply --suppress-diff

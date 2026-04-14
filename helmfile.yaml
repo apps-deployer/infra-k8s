@@ -9,7 +9,6 @@ helmDefaults:
   timeout: 600
   atomic: true
   createNamespace: true
-  suppressDiff: true
 
 releases:
   - name: traefik
