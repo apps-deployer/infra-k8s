@@ -73,7 +73,7 @@ releases:
 
   - name: cert-manager-webhook-yandex
     namespace: cert-manager
-    chart: https://github.com/yandex-cloud/cert-manager-webhook-yandex/releases/download/v0.2.0/cert-manager-webhook-yandex-0.2.0.tgz
+    chart: ./charts/cert-manager-webhook-yandex
     needs:
       - cert-manager/cert-manager
     values:
